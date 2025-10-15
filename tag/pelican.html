@@ -55,7 +55,7 @@
 <h3>Step 2: Set Up the GitHub Repository</h3>
 <p>Push your Pelican <em>source code</em> (not the <code>output</code> folder) to a new GitHub repository.</p>
 <ol>
-<li><strong>Create a new repo on GitHub</strong> named <code>flashpelican</code>.</li>
+<li><strong>Create a new repo on GitHub</strong> named <code>flashpelican</code> under the <code>yoloinfinity55</code> account.</li>
 <li>
 <p><strong>Add a <code>.gitignore</code> file</strong> to your project to exclude unnecessary files. It should contain at least:</p>
 <p><code>output/
@@ -71,7 +71,7 @@ __pycache__/
 git add .
 git commit -m "Initial commit of Pelican site"
 git branch -M main
-git remote add origin https://github.com/yoloinfinity/flashpelican.git
+git remote add origin https://github.com/yoloinfinity55/flashpelican.git
 git push -u origin main
 ```</p>
 </li>
@@ -82,7 +82,7 @@ git push -u origin main
 <li><strong>Create the workflow directory</strong>: In your project, create a new folder path: <code>.github/workflows/</code>.</li>
 <li><strong>Create a new YAML file</strong>: Inside that directory, create a file named <code>deploy.yml</code>.</li>
 <li>
-<p><strong>Add the workflow code</strong>: Paste the following content into <code>deploy.yml</code>.</p>
+<p><strong>Add the workflow code</strong>: Paste the following content into <code>deploy.yml</code>. <strong>Note the important <code>permissions</code> block</strong>, which gives the action permission to push the built site to your <code>gh-pages</code> branch.</p>
 <p>```yaml
 name: Deploy Pelican Site to GitHub Pages</p>
 <p>on:
@@ -92,11 +92,16 @@ name: Deploy Pelican Site to GitHub Pages</p>
       - main</p>
 <p>jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3</p>
-<div class="highlight"><pre><span></span><code><span class="w">  </span>-<span class="w"> </span>name:<span class="w"> </span>Set<span class="w"> </span>up<span class="w"> </span>Python
+    runs-on: ubuntu-latest</p>
+<div class="highlight"><pre><span></span><code>#<span class="w"> </span>This<span class="w"> </span>permissions<span class="w"> </span>block<span class="w"> </span>is<span class="w"> </span>essential<span class="w"> </span>for<span class="w"> </span>the<span class="w"> </span>action<span class="w"> </span>to<span class="w"> </span>push<span class="w"> </span>to<span class="w"> </span>your<span class="w"> </span>repo
+permissions:
+<span class="w">  </span>contents:<span class="w"> </span>write
+
+steps:
+<span class="w">  </span>-<span class="w"> </span>name:<span class="w"> </span>Checkout<span class="w"> </span>repository
+<span class="w">    </span>uses:<span class="w"> </span>actions/checkout@v4
+
+<span class="w">  </span>-<span class="w"> </span>name:<span class="w"> </span>Set<span class="w"> </span>up<span class="w"> </span>Python
 <span class="w">    </span>uses:<span class="w"> </span>actions/setup-python@v4
 <span class="w">    </span>with:
 <span class="w">      </span>python-version:<span class="w"> </span>&#39;3.10&#39;
@@ -122,12 +127,12 @@ name: Deploy Pelican Site to GitHub Pages</p>
 </ol>
 <h3>Step 4: Finalize and Deploy</h3>
 <ol>
-<li><strong>Commit and push</strong> your new files (<code>publishconf.py</code>, <code>requirements.txt</code>, and <code>.github/workflows/deploy.yml</code>) to GitHub.</li>
-<li><strong>Go to your <code>flashpelican</code> repository settings</strong> on GitHub, then click on the <strong>"Pages"</strong> tab.</li>
+<li><strong>Commit and push</strong> your new files (<code>publishconf.py</code>, <code>requirements.txt</code>, and the updated <code>.github/workflows/deploy.yml</code>) to GitHub.</li>
+<li><strong>Go to your <code>flashpelican</code> repository settings</strong> on GitHub, then click on the <strong>"Pages"</strong> tab in the left sidebar.</li>
 <li>Under "Build and deployment", set the <strong>Source</strong> to <strong>"Deploy from a branch"</strong>.</li>
 <li>Set the <strong>Branch</strong> to <code>gh-pages</code> and the folder to <code>/ (root)</code>. Click <strong>Save</strong>.</li>
 </ol>
-<p>The GitHub Action will now run automatically. It will build your site and push the final HTML/CSS to a special <code>gh-pages</code> branch. After a minute or two, your site will be live at: <strong>https://yoloinfinity55.github.io/flashpelican</strong></p>                    </article>
+<p>The GitHub Action will now run automatically. After a minute or two, your site will be live at: <strong>https://yoloinfinity55.github.io/flashpelican</strong>```</p>                    </article>
                 </aside><!-- /#featured -->
                     <section id="content" class="body">
                         <h1>Other articles</h1>

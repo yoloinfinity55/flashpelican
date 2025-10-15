@@ -24,7 +24,7 @@
 &lt;h3&gt;Step 2: Set Up the GitHub Repository&lt;/h3&gt;
 &lt;p&gt;Push your Pelican &lt;em&gt;source code&lt;/em&gt; (not the &lt;code&gt;output&lt;/code&gt; folder) to a new GitHub repository.&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Create a new repo on GitHub&lt;/strong&gt; named &lt;code&gt;flashpelican&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Create a new repo on GitHub&lt;/strong&gt; named &lt;code&gt;flashpelican&lt;/code&gt; under the &lt;code&gt;yoloinfinity55&lt;/code&gt; account.&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Add a &lt;code&gt;.gitignore&lt;/code&gt; file&lt;/strong&gt; to your project to exclude unnecessary files. It should contain at least:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;output/
@@ -40,7 +40,7 @@ __pycache__/
 git add .
 git commit -m "Initial commit of Pelican site"
 git branch -M main
-git remote add origin https://github.com/yoloinfinity/flashpelican.git
+git remote add origin https://github.com/yoloinfinity55/flashpelican.git
 git push -u origin main
 ```&lt;/p&gt;
 &lt;/li&gt;
@@ -51,7 +51,7 @@ git push -u origin main
 &lt;li&gt;&lt;strong&gt;Create the workflow directory&lt;/strong&gt;: In your project, create a new folder path: &lt;code&gt;.github/workflows/&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Create a new YAML file&lt;/strong&gt;: Inside that directory, create a file named &lt;code&gt;deploy.yml&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Add the workflow code&lt;/strong&gt;: Paste the following content into &lt;code&gt;deploy.yml&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Add the workflow code&lt;/strong&gt;: Paste the following content into &lt;code&gt;deploy.yml&lt;/code&gt;. &lt;strong&gt;Note the important &lt;code&gt;permissions&lt;/code&gt; block&lt;/strong&gt;, which gives the action permission to push the built site to your &lt;code&gt;gh-pages&lt;/code&gt; branch.&lt;/p&gt;
 &lt;p&gt;```yaml
 name: Deploy Pelican Site to GitHub Pages&lt;/p&gt;
 &lt;p&gt;on:
@@ -61,11 +61,16 @@ name: Deploy Pelican Site to GitHub Pages&lt;/p&gt;
       - main&lt;/p&gt;
 &lt;p&gt;jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="w"&gt;  &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;name:&lt;span class="w"&gt; &lt;/span&gt;Set&lt;span class="w"&gt; &lt;/span&gt;up&lt;span class="w"&gt; &lt;/span&gt;Python
+    runs-on: ubuntu-latest&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;#&lt;span class="w"&gt; &lt;/span&gt;This&lt;span class="w"&gt; &lt;/span&gt;permissions&lt;span class="w"&gt; &lt;/span&gt;block&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;essential&lt;span class="w"&gt; &lt;/span&gt;for&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;action&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;push&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;your&lt;span class="w"&gt; &lt;/span&gt;repo
+permissions:
+&lt;span class="w"&gt;  &lt;/span&gt;contents:&lt;span class="w"&gt; &lt;/span&gt;write
+
+steps:
+&lt;span class="w"&gt;  &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;name:&lt;span class="w"&gt; &lt;/span&gt;Checkout&lt;span class="w"&gt; &lt;/span&gt;repository
+&lt;span class="w"&gt;    &lt;/span&gt;uses:&lt;span class="w"&gt; &lt;/span&gt;actions/checkout@v4
+
+&lt;span class="w"&gt;  &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;name:&lt;span class="w"&gt; &lt;/span&gt;Set&lt;span class="w"&gt; &lt;/span&gt;up&lt;span class="w"&gt; &lt;/span&gt;Python
 &lt;span class="w"&gt;    &lt;/span&gt;uses:&lt;span class="w"&gt; &lt;/span&gt;actions/setup-python@v4
 &lt;span class="w"&gt;    &lt;/span&gt;with:
 &lt;span class="w"&gt;      &lt;/span&gt;python-version:&lt;span class="w"&gt; &lt;/span&gt;&amp;#39;3.10&amp;#39;
@@ -91,12 +96,12 @@ name: Deploy Pelican Site to GitHub Pages&lt;/p&gt;
 &lt;/ol&gt;
 &lt;h3&gt;Step 4: Finalize and Deploy&lt;/h3&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Commit and push&lt;/strong&gt; your new files (&lt;code&gt;publishconf.py&lt;/code&gt;, &lt;code&gt;requirements.txt&lt;/code&gt;, and &lt;code&gt;.github/workflows/deploy.yml&lt;/code&gt;) to GitHub.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Go to your &lt;code&gt;flashpelican&lt;/code&gt; repository settings&lt;/strong&gt; on GitHub, then click on the &lt;strong&gt;"Pages"&lt;/strong&gt; tab.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Commit and push&lt;/strong&gt; your new files (&lt;code&gt;publishconf.py&lt;/code&gt;, &lt;code&gt;requirements.txt&lt;/code&gt;, and the updated &lt;code&gt;.github/workflows/deploy.yml&lt;/code&gt;) to GitHub.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Go to your &lt;code&gt;flashpelican&lt;/code&gt; repository settings&lt;/strong&gt; on GitHub, then click on the &lt;strong&gt;"Pages"&lt;/strong&gt; tab in the left sidebar.&lt;/li&gt;
 &lt;li&gt;Under "Build and deployment", set the &lt;strong&gt;Source&lt;/strong&gt; to &lt;strong&gt;"Deploy from a branch"&lt;/strong&gt;.&lt;/li&gt;
 &lt;li&gt;Set the &lt;strong&gt;Branch&lt;/strong&gt; to &lt;code&gt;gh-pages&lt;/code&gt; and the folder to &lt;code&gt;/ (root)&lt;/code&gt;. Click &lt;strong&gt;Save&lt;/strong&gt;.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;The GitHub Action will now run automatically. It will build your site and push the final HTML/CSS to a special &lt;code&gt;gh-pages&lt;/code&gt; branch. After a minute or two, your site will be live at: &lt;strong&gt;https://yoloinfinity55.github.io/flashpelican&lt;/strong&gt;&lt;/p&gt;</content><category term="Tech"/><category term="pelican"/><category term="github"/><category term="deployment"/><category term="automation"/><category term="ci-cd"/></entry><entry><title>Quick Guide: Pelican on an M1 Mac (Markdown)</title><link href="https://yoloinfinity55.github.io/flashpelican/quick-guide-pelican-on-an-m1-mac-markdown.html" rel="alternate"/><published>2025-10-15T11:45:00-04:00</published><updated>2025-10-15T11:45:00-04:00</updated><author><name>Infinity55</name></author><id>tag:yoloinfinity55.github.io,2025-10-15:/flashpelican/quick-guide-pelican-on-an-m1-mac-markdown.html</id><summary type="html">&lt;p&gt;This is a practical, step-by-step guide for installing and setting up the static site generator &lt;strong&gt;Pelican&lt;/strong&gt; on a &lt;strong&gt;Mac mini with an M1 (Apple Silicon) chip&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;The GitHub Action will now run automatically. After a minute or two, your site will be live at: &lt;strong&gt;https://yoloinfinity55.github.io/flashpelican&lt;/strong&gt;```&lt;/p&gt;</content><category term="Tech"/><category term="pelican"/><category term="github"/><category term="deployment"/><category term="automation"/><category term="ci-cd"/></entry><entry><title>Quick Guide: Pelican on an M1 Mac (Markdown)</title><link href="https://yoloinfinity55.github.io/flashpelican/quick-guide-pelican-on-an-m1-mac-markdown.html" rel="alternate"/><published>2025-10-15T11:45:00-04:00</published><updated>2025-10-15T11:45:00-04:00</updated><author><name>Infinity55</name></author><id>tag:yoloinfinity55.github.io,2025-10-15:/flashpelican/quick-guide-pelican-on-an-m1-mac-markdown.html</id><summary type="html">&lt;p&gt;This is a practical, step-by-step guide for installing and setting up the static site generator &lt;strong&gt;Pelican&lt;/strong&gt; on a &lt;strong&gt;Mac mini with an M1 (Apple Silicon) chip&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Pelican is a Python-based tool, so the first steps focus on establishing a clean Python environment.&lt;/p&gt;
 &lt;h2&gt;💻 Part 1: Initial M1 Setup (Python &amp;amp; Virtual Environment …&lt;/h2&gt;</summary><content type="html">&lt;p&gt;This is a practical, step-by-step guide for installing and setting up the static site generator &lt;strong&gt;Pelican&lt;/strong&gt; on a &lt;strong&gt;Mac mini with an M1 (Apple Silicon) chip&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Pelican is a Python-based tool, so the first steps focus on establishing a clean Python environment.&lt;/p&gt;
