@@ -1,5 +1,5 @@
 AUTHOR = 'Infinity55'
-SITENAME = 'FlashPelican'
+SITENAME = 'RachelsCreative2020'
 SITEURL = ""
 
 PATH = "content"
