@@ -1,7 +1,6 @@
 name: Deploy Pelican Site to GitHub Pages
 
 on:
-  # Run on pushes to the main branch
   push:
     branches:
       - main
@@ -9,6 +8,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:      # <--- ADD THIS BLOCK
+      contents: write   # <--- Grant write permission
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
