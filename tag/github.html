@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>FlashPelican - github</title>
+                        <link rel="stylesheet" href="https://yoloinfinity55.github.io/flashpelican/theme/css/main.css" />
+                                <link href="https://yoloinfinity55.github.io/flashpelican/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="FlashPelican Atom Feed" />
+        </head>
+
+        <body id="index" class="home">
+                <header id="banner" class="body">
+                        <h1><a href="https://yoloinfinity55.github.io/flashpelican/">FlashPelican</a></h1>
+                        <nav><ul>
+                                                <li><a href="https://yoloinfinity55.github.io/flashpelican/category/general.html">General</a></li>
+                                                <li><a href="https://yoloinfinity55.github.io/flashpelican/category/tech.html">Tech</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+
+                <aside id="featured" class="body">
+                    <article>
+                        <h1 class="entry-title"><a href="https://yoloinfinity55.github.io/flashpelican/how-to-deploy-a-pelican-site-to-github-pages.html">How to Deploy a Pelican Site to GitHub Pages</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-10-15T12:00:00-04:00">
+                Published: Wed 15 October 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="https://yoloinfinity55.github.io/flashpelican/author/infinity55.html">Infinity55</a>
+                </address>
+        <p>In <a href="https://yoloinfinity55.github.io/flashpelican/category/tech.html">Tech</a>.</p>
+<p>tags: <a href="https://yoloinfinity55.github.io/flashpelican/tag/pelican.html">pelican</a> <a href="https://yoloinfinity55.github.io/flashpelican/tag/github.html">github</a> <a href="https://yoloinfinity55.github.io/flashpelican/tag/deployment.html">deployment</a> <a href="https://yoloinfinity55.github.io/flashpelican/tag/automation.html">automation</a> <a href="https://yoloinfinity55.github.io/flashpelican/tag/ci-cd.html">ci-cd</a> </p>        
+</footer><!-- /.post-info --><p>Deploying a Pelican static site to GitHub Pages is a common and effective way to host it for free. This guide details how to automate the process, so your site updates automatically whenever you push new content.</p>
+<p>We will deploy a <strong>Project Page</strong> to the URL <code>https://yoloinfinity55.github.io/flashpelican</code>.</p>
+<h3>Step 1: Prepare Your Pelican Site for Production</h3>
+<p>Your site needs to know its final URL.</p>
+<ol>
+<li><strong>Open <code>publishconf.py</code></strong>: This file is specifically for production settings.</li>
+<li>
+<p><strong>Set the <code>SITEURL</code></strong>: Find the <code>SITEURL</code> variable and set it to your full GitHub Pages URL.</p>
+<p>```python</p>
+<h1>In publishconf.py</h1>
+<p>SITEURL = 'https://yoloinfinity55.github.io/flashpelican'
+```</p>
+</li>
+<li>
+<p><strong>Create a <code>requirements.txt</code> file</strong>: This tells the automated process what Python packages to install.</p>
+<p>```bash</p>
+<h1>Run this in your terminal with your virtual environment active</h1>
+<p>pip freeze &gt; requirements.txt
+```</p>
+</li>
+</ol>
+<h3>Step 2: Set Up the GitHub Repository</h3>
+<p>Push your Pelican <em>source code</em> (not the <code>output</code> folder) to a new GitHub repository.</p>
+<ol>
+<li><strong>Create a new repo on GitHub</strong> named <code>flashpelican</code>.</li>
+<li>
+<p><strong>Add a <code>.gitignore</code> file</strong> to your project to exclude unnecessary files. It should contain at least:</p>
+<p><code>output/
+.venv/
+__pycache__/
+*.pyc</code></p>
+</li>
+<li>
+<p><strong>Push your project</strong> to the new repository's <code>main</code> branch.</p>
+<p>```bash</p>
+<h1>From your project folder</h1>
+<p>git init
+git add .
+git commit -m "Initial commit of Pelican site"
+git branch -M main
+git remote add origin https://github.com/yoloinfinity/flashpelican.git
+git push -u origin main
+```</p>
+</li>
+</ol>
+<h3>Step 3: Create the GitHub Actions Workflow</h3>
+<p>This Action will automatically build and deploy your site.</p>
+<ol>
+<li><strong>Create the workflow directory</strong>: In your project, create a new folder path: <code>.github/workflows/</code>.</li>
+<li><strong>Create a new YAML file</strong>: Inside that directory, create a file named <code>deploy.yml</code>.</li>
+<li>
+<p><strong>Add the workflow code</strong>: Paste the following content into <code>deploy.yml</code>.</p>
+<p>```yaml
+name: Deploy Pelican Site to GitHub Pages</p>
+<p>on:
+  # Run on pushes to the main branch
+  push:
+    branches:
+      - main</p>
+<p>jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span>-<span class="w"> </span>name:<span class="w"> </span>Set<span class="w"> </span>up<span class="w"> </span>Python
+<span class="w">    </span>uses:<span class="w"> </span>actions/setup-python@v4
+<span class="w">    </span>with:
+<span class="w">      </span>python-version:<span class="w"> </span>&#39;3.10&#39;
+
+<span class="w">  </span>-<span class="w"> </span>name:<span class="w"> </span>Install<span class="w"> </span>dependencies
+<span class="w">    </span>run:<span class="w"> </span>|
+<span class="w">      </span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+<span class="w">      </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="w">  </span>-<span class="w"> </span>name:<span class="w"> </span>Build<span class="w"> </span>the<span class="w"> </span>site
+<span class="w">    </span>#<span class="w"> </span>Use<span class="w"> </span>publishconf.py<span class="w"> </span>for<span class="w"> </span>production<span class="w"> </span>settings
+<span class="w">    </span>run:<span class="w"> </span>pelican<span class="w"> </span>content<span class="w"> </span>-s<span class="w"> </span>publishconf.py
+
+<span class="w">  </span>-<span class="w"> </span>name:<span class="w"> </span>Deploy<span class="w"> </span>to<span class="w"> </span>GitHub<span class="w"> </span>Pages
+<span class="w">    </span>uses:<span class="w"> </span>peaceiris/actions-gh-pages@v3
+<span class="w">    </span>with:
+<span class="w">      </span>github_token:<span class="w"> </span><span class="cp">${</span><span class="p">{</span> <span class="n">secrets</span><span class="o">.</span><span class="n">GITHUB_TOKEN</span> <span class="cp">}</span>}
+<span class="w">      </span>publish_dir:<span class="w"> </span>./output
+</code></pre></div>
+
+<p>```</p>
+</li>
+</ol>
+<h3>Step 4: Finalize and Deploy</h3>
+<ol>
+<li><strong>Commit and push</strong> your new files (<code>publishconf.py</code>, <code>requirements.txt</code>, and <code>.github/workflows/deploy.yml</code>) to GitHub.</li>
+<li><strong>Go to your <code>flashpelican</code> repository settings</strong> on GitHub, then click on the <strong>"Pages"</strong> tab.</li>
+<li>Under "Build and deployment", set the <strong>Source</strong> to <strong>"Deploy from a branch"</strong>.</li>
+<li>Set the <strong>Branch</strong> to <code>gh-pages</code> and the folder to <code>/ (root)</code>. Click <strong>Save</strong>.</li>
+</ol>
+<p>The GitHub Action will now run automatically. It will build your site and push the final HTML/CSS to a special <code>gh-pages</code> branch. After a minute or two, your site will be live at: <strong>https://yoloinfinity55.github.io/flashpelican</strong></p>                    </article>
+                </aside><!-- /#featured -->
+                <section id="extras" class="body">
+                                <div class="blogroll">
+                                        <h2>links</h2>
+                                        <ul>
+                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
+                                                        <li><a href="https://www.python.org/">Python.org</a></li>
+                                                        <li><a href="https://palletsprojects.com/p/jinja/">Jinja2</a></li>
+                                                        <li><a href="#">You can modify those links in your config file</a></li>
+                                        </ul>
+                                </div><!-- /.blogroll -->
+                                <div class="social">
+                                        <h2>social</h2>
+                                        <ul>
+                                                        <li><a href="https://yoloinfinity55.github.io/flashpelican/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                                        <li><a href="#">You can add links in your config file</a></li>
+                                                        <li><a href="#">Another social link</a></li>
+                                        </ul>
+                                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
+
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
+
+        </body>
+</html>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>FlashPelican - General</title><link href="https://yoloinfinity55.github.io/flashpelican/" rel="alternate"/><link href="https://yoloinfinity55.github.io/flashpelican/feeds/general.atom.xml" rel="self"/><id>https://yoloinfinity55.github.io/flashpelican/</id><updated>2025-10-15T12:05:00-04:00</updated><entry><title>Setting up the static site generator Pelican</title><link href="https://yoloinfinity55.github.io/flashpelican/setting-up-the-static-site-generator-pelican.html" rel="alternate"/><published>2025-10-15T12:05:00-04:00</published><updated>2025-10-15T12:05:00-04:00</updated><author><name>Infinity55</name></author><id>tag:yoloinfinity55.github.io,2025-10-15:/flashpelican/setting-up-the-static-site-generator-pelican.html</id><summary type="html">&lt;p&gt;This is a practical, step-by-step guide for installing and setting up the static site generator Pelican on a Mac mini with an M1 (Apple Silicon) chip.&lt;/p&gt;
+&lt;p&gt;Pelican is a Python-based tool, so the first steps focus on establishing a clean Python environment.&lt;/p&gt;
+&lt;p&gt;💻 Part 1: Initial M1 Setup (Python &amp;amp; Virtual Environment …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is a practical, step-by-step guide for installing and setting up the static site generator Pelican on a Mac mini with an M1 (Apple Silicon) chip.&lt;/p&gt;
+&lt;p&gt;Pelican is a Python-based tool, so the first steps focus on establishing a clean Python environment.&lt;/p&gt;
+&lt;p&gt;💻 Part 1: Initial M1 Setup (Python &amp;amp; Virtual Environment)&lt;/p&gt;
+&lt;p&gt;A virtual environment is highly recommended for all Python projects. It isolates the dependencies for Pelican from other Python projects and your system's Python installation.&lt;/p&gt;
+&lt;p&gt;Step 1: Install Python (if not already installed)&lt;/p&gt;
+&lt;p&gt;While macOS comes with a version of Python, it's best practice for development to install the official version.&lt;/p&gt;
+&lt;p&gt;Download the Official Installer: Go to the official Python website's downloads page and look for the latest stable version for macOS. The installer will automatically be an Apple Silicon (arm64) build, which is natively optimized for your M1 chip.&lt;/p&gt;
+&lt;p&gt;Run the Installer: Double-click the downloaded .pkg file and follow the on-screen prompts.&lt;/p&gt;
+&lt;p&gt;Verify the Installation: Open your Terminal application (Spotlight search: &lt;kbd&gt;Cmd&lt;/kbd&gt; + &lt;kbd&gt;Space&lt;/kbd&gt;, type "Terminal").&lt;/p&gt;
+&lt;p&gt;code
+Bash
+download
+content_copy
+expand_less
+python3 --version&lt;/p&gt;
+&lt;h1&gt;Expected output: Python 3.x.x (where x.x is the version you installed)&lt;/h1&gt;
+&lt;p&gt;Step 2: Create Your Project Directory&lt;/p&gt;
+&lt;p&gt;Choose a location for your Pelican site and create a new folder.&lt;/p&gt;
+&lt;p&gt;In your Terminal, navigate to your desired location (e.g., a projects folder in your home directory) and create a new project folder named my-pelican-site.&lt;/p&gt;
+&lt;p&gt;code
+Bash
+download
+content_copy
+expand_less
+mkdir -p ~/projects/my-pelican-site
+cd ~/projects/my-pelican-site
+Step 3: Create and Activate a Virtual Environment&lt;/p&gt;
+&lt;p&gt;Use Python's built-in venv module to create an isolated environment in your new project folder.&lt;/p&gt;
+&lt;p&gt;Create the Virtual Environment:&lt;/p&gt;
+&lt;p&gt;code
+Bash
+download
+content_copy
+expand_less
+python3 -m venv .venv&lt;/p&gt;
+&lt;p&gt;This command creates a new folder named .venv inside your project directory.&lt;/p&gt;
+&lt;p&gt;Activate the Virtual Environment:&lt;/p&gt;
+&lt;p&gt;code
+Bash
+download
+content_copy
+expand_less
+source .venv/bin/activate&lt;/p&gt;
+&lt;p&gt;Your Terminal prompt should now change to start with (.venv), indicating the environment is active. All packages you install now will only affect this project.&lt;/p&gt;
+&lt;p&gt;📦 Part 2: Pelican Installation and Quickstart&lt;/p&gt;
+&lt;p&gt;With the Python environment ready, you can now install Pelican and generate your site.&lt;/p&gt;
+&lt;p&gt;Step 4: Install Pelican&lt;/p&gt;
+&lt;p&gt;Use the Python package installer (pip) to install Pelican and the Markdown parser (which is recommended for writing content).&lt;/p&gt;
+&lt;p&gt;Install Pelican:&lt;/p&gt;
+&lt;p&gt;code
+Bash
+download
+content_copy
+expand_less
+python -m pip install "pelican[markdown]"
+Step 5: Run the Quickstart Script&lt;/p&gt;
+&lt;p&gt;Pelican comes with a quickstart utility to set up the basic structure and configuration.&lt;/p&gt;
+&lt;p&gt;Run the Quickstart:&lt;/p&gt;
+&lt;p&gt;code
+Bash
+download
+content_copy
+expand_less
+pelican-quickstart&lt;/p&gt;
+&lt;p&gt;Answer the Questions: The script will ask you a series of questions.&lt;/p&gt;
+&lt;p&gt;For questions with a default value in brackets (e.g., [my blog]), you can press &lt;kbd&gt;Enter&lt;/kbd&gt; to accept it.&lt;/p&gt;
+&lt;p&gt;You will be asked for your URL prefix. This is important. If you plan to deploy your site to a domain like https://www.example.com, enter that here. For now, you can press &lt;kbd&gt;Enter&lt;/kbd&gt; to leave it blank, or enter a placeholder.&lt;/p&gt;
+&lt;p&gt;Do you want to generate a Makefile? (Y/n): Y (Recommended for easier running).&lt;/p&gt;
+&lt;p&gt;Do you want to generate a Rakefile? (Y/n): n (Unless you use Ruby Rake).&lt;/p&gt;
+&lt;p&gt;✍️ Part 3: Create Content and Preview
+Step 6: Create Your First Article&lt;/p&gt;
+&lt;p&gt;Pelican content is typically written in Markdown or reStructuredText. The quickstart created a content folder.&lt;/p&gt;
+&lt;p&gt;Create a New File: Use your preferred text editor (like VS Code, Sublime Text, or nano in the terminal) to create a new file named first-post.md inside the content folder.&lt;/p&gt;
+&lt;p&gt;code
+Bash
+download
+content_copy
+expand_less&lt;/p&gt;
+&lt;h1&gt;You can use the terminal editor &lt;code&gt;nano&lt;/code&gt;&lt;/h1&gt;
+&lt;p&gt;nano content/first-post.md&lt;/p&gt;
+&lt;p&gt;Add Content: Paste the following basic structure, which includes required metadata:&lt;/p&gt;
+&lt;p&gt;code
+Markdown
+download
+content_copy
+expand_less
+Title: Hello World of Pelican
+Date: 2025-10-15 12:00
+Category: General
+Tags: quickstart, mac-mini, m1&lt;/p&gt;
+&lt;p&gt;This is my first post created with Pelican on my M1 Mac mini!
+It's super easy to get started once Python and venv are set up.&lt;/p&gt;
+&lt;p&gt;Save the File: If you used nano, press &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;O&lt;/kbd&gt;, then &lt;kbd&gt;Enter&lt;/kbd&gt;, then &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;X&lt;/kbd&gt;.&lt;/p&gt;
+&lt;p&gt;Step 7: Generate Your Static Site&lt;/p&gt;
+&lt;p&gt;This step compiles your content into the final HTML/CSS/JS files.&lt;/p&gt;
+&lt;p&gt;Generate the Site:&lt;/p&gt;
+&lt;p&gt;code
+Bash
+download
+content_copy
+expand_less
+pelican content&lt;/p&gt;
+&lt;p&gt;The generated files will be placed in the newly created output/ directory.&lt;/p&gt;
+&lt;p&gt;Step 8: Preview Your Site Locally&lt;/p&gt;
+&lt;p&gt;Use Pelican's built-in web server to view your site in a browser.&lt;/p&gt;
+&lt;p&gt;Serve the Site:&lt;/p&gt;
+&lt;p&gt;code
+Bash
+download
+content_copy
+expand_less
+pelican --listen&lt;/p&gt;
+&lt;h1&gt;OR, if you chose to generate a Makefile:&lt;/h1&gt;
+&lt;p&gt;make serve&lt;/p&gt;
+&lt;p&gt;View in Browser: Open your web browser and navigate to:&lt;/p&gt;
+&lt;p&gt;code
+Code
+download
+content_copy
+expand_less
+http://localhost:8000/&lt;/p&gt;
+&lt;p&gt;You should now see your Pelican site with your new "Hello World of Pelican" post!&lt;/p&gt;
+&lt;p&gt;Final Step: Deactivate Environment&lt;/p&gt;
+&lt;p&gt;When you are done working, you should deactivate the virtual environment.&lt;/p&gt;
+&lt;p&gt;Deactivate:&lt;/p&gt;
+&lt;p&gt;code
+Bash
+download
+content_copy
+expand_less
+deactivate&lt;/p&gt;
+&lt;p&gt;Your Terminal prompt will return to normal.&lt;/p&gt;
+&lt;p&gt;To resume work later, just navigate back to your project folder (cd ~/projects/my-pelican-site) and run source .venv/bin/activate again.&lt;/p&gt;
+&lt;p&gt;Sources
+help
+Quickstart - PELICAN 4.11.0&lt;/p&gt;</content><category term="General"/><category term="quickstart"/><category term="mac-mini"/><category term="m1"/></entry><entry><title>Hello World of Pelican</title><link href="https://yoloinfinity55.github.io/flashpelican/hello-world-of-pelican.html" rel="alternate"/><published>2025-10-15T12:00:00-04:00</published><updated>2025-10-15T12:00:00-04:00</updated><author><name>Infinity55</name></author><id>tag:yoloinfinity55.github.io,2025-10-15:/flashpelican/hello-world-of-pelican.html</id><content type="html">&lt;p&gt;This is my first post created with Pelican on my M1 Mac mini!
+It's super easy to get started once Python and venv are set up.&lt;/p&gt;</content><category term="General"/><category term="quickstart"/><category term="mac-mini"/><category term="m1"/></entry></feed>

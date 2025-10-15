@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>FlashPelican</title>
+                        <link rel="stylesheet" href="https://yoloinfinity55.github.io/flashpelican/theme/css/main.css" />
+                                <link href="https://yoloinfinity55.github.io/flashpelican/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="FlashPelican Atom Feed" />
+        </head>
+
+        <body id="index" class="home">
+                <header id="banner" class="body">
+                        <h1><a href="https://yoloinfinity55.github.io/flashpelican/">FlashPelican</a></h1>
+                        <nav><ul>
+                                                <li><a href="https://yoloinfinity55.github.io/flashpelican/category/general.html">General</a></li>
+                                                <li><a href="https://yoloinfinity55.github.io/flashpelican/category/tech.html">Tech</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+
+                <aside id="featured" class="body">
+                    <article>
+                        <h1 class="entry-title"><a href="https://yoloinfinity55.github.io/flashpelican/setting-up-the-static-site-generator-pelican.html">Setting up the static site generator Pelican</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-10-15T12:05:00-04:00">
+                Published: Wed 15 October 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="https://yoloinfinity55.github.io/flashpelican/author/infinity55.html">Infinity55</a>
+                </address>
+        <p>In <a href="https://yoloinfinity55.github.io/flashpelican/category/general.html">General</a>.</p>
+<p>tags: <a href="https://yoloinfinity55.github.io/flashpelican/tag/quickstart.html">quickstart</a> <a href="https://yoloinfinity55.github.io/flashpelican/tag/mac-mini.html">mac-mini</a> <a href="https://yoloinfinity55.github.io/flashpelican/tag/m1.html">m1</a> </p>        
+</footer><!-- /.post-info --><p>This is a practical, step-by-step guide for installing and setting up the static site generator Pelican on a Mac mini with an M1 (Apple Silicon) chip.</p>
+<p>Pelican is a Python-based tool, so the first steps focus on establishing a clean Python environment.</p>
+<p>💻 Part 1: Initial M1 Setup (Python &amp; Virtual Environment)</p>
+<p>A virtual environment is highly recommended for all Python projects. It isolates the dependencies for Pelican from other Python projects and your system's Python installation.</p>
+<p>Step 1: Install Python (if not already installed)</p>
+<p>While macOS comes with a version of Python, it's best practice for development to install the official version.</p>
+<p>Download the Official Installer: Go to the official Python website's downloads page and look for the latest stable version for macOS. The installer will automatically be an Apple Silicon (arm64) build, which is natively optimized for your M1 chip.</p>
+<p>Run the Installer: Double-click the downloaded .pkg file and follow the on-screen prompts.</p>
+<p>Verify the Installation: Open your Terminal application (Spotlight search: <kbd>Cmd</kbd> + <kbd>Space</kbd>, type "Terminal").</p>
+<p>code
+Bash
+download
+content_copy
+expand_less
+python3 --version</p>
+<h1>Expected output: Python 3.x.x (where x.x is the version you installed)</h1>
+<p>Step 2: Create Your Project Directory</p>
+<p>Choose a location for your Pelican site and create a new folder.</p>
+<p>In your Terminal, navigate to your desired location (e.g., a projects folder in your home directory) and create a new project folder named my-pelican-site.</p>
+<p>code
+Bash
+download
+content_copy
+expand_less
+mkdir -p ~/projects/my-pelican-site
+cd ~/projects/my-pelican-site
+Step 3: Create and Activate a Virtual Environment</p>
+<p>Use Python's built-in venv module to create an isolated environment in your new project folder.</p>
+<p>Create the Virtual Environment:</p>
+<p>code
+Bash
+download
+content_copy
+expand_less
+python3 -m venv .venv</p>
+<p>This command creates a new folder named .venv inside your project directory.</p>
+<p>Activate the Virtual Environment:</p>
+<p>code
+Bash
+download
+content_copy
+expand_less
+source .venv/bin/activate</p>
+<p>Your Terminal prompt should now change to start with (.venv), indicating the environment is active. All packages you install now will only affect this project.</p>
+<p>📦 Part 2: Pelican Installation and Quickstart</p>
+<p>With the Python environment ready, you can now install Pelican and generate your site.</p>
+<p>Step 4: Install Pelican</p>
+<p>Use the Python package installer (pip) to install Pelican and the Markdown parser (which is recommended for writing content).</p>
+<p>Install Pelican:</p>
+<p>code
+Bash
+download
+content_copy
+expand_less
+python -m pip install "pelican[markdown]"
+Step 5: Run the Quickstart Script</p>
+<p>Pelican comes with a quickstart utility to set up the basic structure and configuration.</p>
+<p>Run the Quickstart:</p>
+<p>code
+Bash
+download
+content_copy
+expand_less
+pelican-quickstart</p>
+<p>Answer the Questions: The script will ask you a series of questions.</p>
+<p>For questions with a default value in brackets (e.g., [my blog]), you can press <kbd>Enter</kbd> to accept it.</p>
+<p>You will be asked for your URL prefix. This is important. If you plan to deploy your site to a domain like https://www.example.com, enter that here. For now, you can press <kbd>Enter</kbd> to leave it blank, or enter a placeholder.</p>
+<p>Do you want to generate a Makefile? (Y/n): Y (Recommended for easier running).</p>
+<p>Do you want to generate a Rakefile? (Y/n): n (Unless you use Ruby Rake).</p>
+<p>✍️ Part 3: Create Content and Preview
+Step 6: Create Your First Article</p>
+<p>Pelican content is typically written in Markdown or reStructuredText. The quickstart created a content folder.</p>
+<p>Create a New File: Use your preferred text editor (like VS Code, Sublime Text, or nano in the terminal) to create a new file named first-post.md inside the content folder.</p>
+<p>code
+Bash
+download
+content_copy
+expand_less</p>
+<h1>You can use the terminal editor <code>nano</code></h1>
+<p>nano content/first-post.md</p>
+<p>Add Content: Paste the following basic structure, which includes required metadata:</p>
+<p>code
+Markdown
+download
+content_copy
+expand_less
+Title: Hello World of Pelican
+Date: 2025-10-15 12:00
+Category: General
+Tags: quickstart, mac-mini, m1</p>
+<p>This is my first post created with Pelican on my M1 Mac mini!
+It's super easy to get started once Python and venv are set up.</p>
+<p>Save the File: If you used nano, press <kbd>Ctrl</kbd>+<kbd>O</kbd>, then <kbd>Enter</kbd>, then <kbd>Ctrl</kbd>+<kbd>X</kbd>.</p>
+<p>Step 7: Generate Your Static Site</p>
+<p>This step compiles your content into the final HTML/CSS/JS files.</p>
+<p>Generate the Site:</p>
+<p>code
+Bash
+download
+content_copy
+expand_less
+pelican content</p>
+<p>The generated files will be placed in the newly created output/ directory.</p>
+<p>Step 8: Preview Your Site Locally</p>
+<p>Use Pelican's built-in web server to view your site in a browser.</p>
+<p>Serve the Site:</p>
+<p>code
+Bash
+download
+content_copy
+expand_less
+pelican --listen</p>
+<h1>OR, if you chose to generate a Makefile:</h1>
+<p>make serve</p>
+<p>View in Browser: Open your web browser and navigate to:</p>
+<p>code
+Code
+download
+content_copy
+expand_less
+http://localhost:8000/</p>
+<p>You should now see your Pelican site with your new "Hello World of Pelican" post!</p>
+<p>Final Step: Deactivate Environment</p>
+<p>When you are done working, you should deactivate the virtual environment.</p>
+<p>Deactivate:</p>
+<p>code
+Bash
+download
+content_copy
+expand_less
+deactivate</p>
+<p>Your Terminal prompt will return to normal.</p>
+<p>To resume work later, just navigate back to your project folder (cd ~/projects/my-pelican-site) and run source .venv/bin/activate again.</p>
+<p>Sources
+help
+Quickstart - PELICAN 4.11.0</p>                    </article>
+                </aside><!-- /#featured -->
+                    <section id="content" class="body">
+                        <h1>Other articles</h1>
+                        <hr />
+                        <ol id="posts-list" class="hfeed">
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="https://yoloinfinity55.github.io/flashpelican/hello-world-of-pelican.html" rel="bookmark"
+                               title="Permalink to Hello World of Pelican">Hello World of Pelican</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-10-15T12:00:00-04:00">
+                Published: Wed 15 October 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="https://yoloinfinity55.github.io/flashpelican/author/infinity55.html">Infinity55</a>
+                </address>
+        <p>In <a href="https://yoloinfinity55.github.io/flashpelican/category/general.html">General</a>.</p>
+<p>tags: <a href="https://yoloinfinity55.github.io/flashpelican/tag/quickstart.html">quickstart</a> <a href="https://yoloinfinity55.github.io/flashpelican/tag/mac-mini.html">mac-mini</a> <a href="https://yoloinfinity55.github.io/flashpelican/tag/m1.html">m1</a> </p>        
+</footer><!-- /.post-info -->                        <p>This is my first post created with Pelican on my M1 Mac mini!
+It's super easy to get started once Python and venv are set up.</p>
+                        <a class="readmore" href="https://yoloinfinity55.github.io/flashpelican/hello-world-of-pelican.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="https://yoloinfinity55.github.io/flashpelican/how-to-deploy-a-pelican-site-to-github-pages.html" rel="bookmark"
+                               title="Permalink to How to Deploy a Pelican Site to GitHub Pages">How to Deploy a Pelican Site to GitHub Pages</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-10-15T12:00:00-04:00">
+                Published: Wed 15 October 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="https://yoloinfinity55.github.io/flashpelican/author/infinity55.html">Infinity55</a>
+                </address>
+        <p>In <a href="https://yoloinfinity55.github.io/flashpelican/category/tech.html">Tech</a>.</p>
+<p>tags: <a href="https://yoloinfinity55.github.io/flashpelican/tag/pelican.html">pelican</a> <a href="https://yoloinfinity55.github.io/flashpelican/tag/github.html">github</a> <a href="https://yoloinfinity55.github.io/flashpelican/tag/deployment.html">deployment</a> <a href="https://yoloinfinity55.github.io/flashpelican/tag/automation.html">automation</a> <a href="https://yoloinfinity55.github.io/flashpelican/tag/ci-cd.html">ci-cd</a> </p>        
+</footer><!-- /.post-info -->                        <p>Deploying a Pelican static site to GitHub Pages is a common and effective way to host it for free. This guide details how to automate the process, so your site updates automatically whenever you push new content.</p>
+<p>We will deploy a <strong>Project Page</strong> to the URL <code>https://yoloinfinity55.github.io …</code></p>
+                        <a class="readmore" href="https://yoloinfinity55.github.io/flashpelican/how-to-deploy-a-pelican-site-to-github-pages.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="https://yoloinfinity55.github.io/flashpelican/quick-guide-pelican-on-an-m1-mac-markdown.html" rel="bookmark"
+                               title="Permalink to Quick Guide: Pelican on an M1 Mac (Markdown)">Quick Guide: Pelican on an M1 Mac (Markdown)</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-10-15T11:45:00-04:00">
+                Published: Wed 15 October 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="https://yoloinfinity55.github.io/flashpelican/author/infinity55.html">Infinity55</a>
+                </address>
+        <p>In <a href="https://yoloinfinity55.github.io/flashpelican/category/tech.html">Tech</a>.</p>
+<p>tags: <a href="https://yoloinfinity55.github.io/flashpelican/tag/pelican.html">pelican</a> <a href="https://yoloinfinity55.github.io/flashpelican/tag/m1.html">m1</a> <a href="https://yoloinfinity55.github.io/flashpelican/tag/mac.html">mac</a> <a href="https://yoloinfinity55.github.io/flashpelican/tag/python.html">python</a> <a href="https://yoloinfinity55.github.io/flashpelican/tag/quickstart.html">quickstart</a> </p>        
+</footer><!-- /.post-info -->                        <p>This is a practical, step-by-step guide for installing and setting up the static site generator <strong>Pelican</strong> on a <strong>Mac mini with an M1 (Apple Silicon) chip</strong>.</p>
+<p>Pelican is a Python-based tool, so the first steps focus on establishing a clean Python environment.</p>
+<h2>💻 Part 1: Initial M1 Setup (Python &amp; Virtual Environment …</h2>
+                        <a class="readmore" href="https://yoloinfinity55.github.io/flashpelican/quick-guide-pelican-on-an-m1-mac-markdown.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="https://yoloinfinity55.github.io/flashpelican/quick-guide-pelican-on-an-m1-mac.html" rel="bookmark"
+                               title="Permalink to Quick Guide: Pelican on an M1 Mac">Quick Guide: Pelican on an M1 Mac</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-10-15T11:30:00-04:00">
+                Published: Wed 15 October 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="https://yoloinfinity55.github.io/flashpelican/author/infinity55.html">Infinity55</a>
+                </address>
+        <p>In <a href="https://yoloinfinity55.github.io/flashpelican/category/tech.html">Tech</a>.</p>
+<p>tags: <a href="https://yoloinfinity55.github.io/flashpelican/tag/pelican.html">pelican</a> <a href="https://yoloinfinity55.github.io/flashpelican/tag/m1.html">m1</a> <a href="https://yoloinfinity55.github.io/flashpelican/tag/mac.html">mac</a> <a href="https://yoloinfinity55.github.io/flashpelican/tag/python.html">python</a> <a href="https://yoloinfinity55.github.io/flashpelican/tag/quickstart.html">quickstart</a> </p>        
+</footer><!-- /.post-info -->                        <p>Setting up the Pelican static site generator on an Apple Silicon (M1) Mac is straightforward. This guide provides the essential commands to get you up and running quickly.</p>
+<h3>1. Prepare Your Environment</h3>
+<p>First, create a project directory and a Python virtual environment to keep dependencies isolated. This assumes you have …</p>
+                        <a class="readmore" href="https://yoloinfinity55.github.io/flashpelican/quick-guide-pelican-on-an-m1-mac.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+                    </ol><!-- /#posts-list -->
+                    </section><!-- /#content -->
+                <section id="extras" class="body">
+                                <div class="blogroll">
+                                        <h2>links</h2>
+                                        <ul>
+                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
+                                                        <li><a href="https://www.python.org/">Python.org</a></li>
+                                                        <li><a href="https://palletsprojects.com/p/jinja/">Jinja2</a></li>
+                                                        <li><a href="#">You can modify those links in your config file</a></li>
+                                        </ul>
+                                </div><!-- /.blogroll -->
+                                <div class="social">
+                                        <h2>social</h2>
+                                        <ul>
+                                                        <li><a href="https://yoloinfinity55.github.io/flashpelican/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                                        <li><a href="#">You can add links in your config file</a></li>
+                                                        <li><a href="#">Another social link</a></li>
+                                        </ul>
+                                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
+
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
+
+        </body>
+</html>
